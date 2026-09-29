@@ -1,0 +1,39 @@
+agent:
+  name: claims-intake-routing-agent
+  platform: Microsoft Copilot Studio
+  scope: intake, classification, routing, and status assistance
+  prohibited_actions:
+    - approve_claim
+    - deny_claim
+    - authorize_payment
+    - change_policy_terms
+  confidence_threshold: 0.85
+
+topics:
+  - id: start_intake
+    trigger_examples:
+      - I need to report a claim
+      - I want to submit an incident
+    required_entities: [request_type, policy_number, incident_date, summary]
+    next_step: validate_and_route
+  - id: missing_information
+    trigger_examples:
+      - I do not know my policy number
+      - what information is missing
+    next_step: ask_one_clarifying_question
+  - id: status_request
+    trigger_examples:
+      - what is the status of my claim
+      - check my case
+    next_step: retrieve_allowed_status
+  - id: human_handoff
+    trigger_examples:
+      - I need a person
+      - this is urgent
+    next_step: create_review_task
+
+routing:
+  standard: claims_queue
+  priority: priority_claims_queue
+  emergency: human_review
+  low_confidence: human_review
