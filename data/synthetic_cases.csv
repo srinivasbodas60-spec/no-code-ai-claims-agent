@@ -1,0 +1,7 @@
+case_id,request_type,policy_number,incident_date,urgency,expected_route,expected_handoff
+CASE-001,claim,PL-10482,2026-08-14,standard,claims_queue,false
+CASE-002,claim,,2026-08-18,standard,human_review,true
+CASE-003,status_request,PL-21009,,standard,service_queue,false
+CASE-004,claim,PL-88731,2026-10-04,standard,human_review,true
+CASE-005,claim,PL-77120,2026-09-21,priority,priority_claims_queue,false
+CASE-006,other,PL-66101,2026-09-20,standard,human_review,true
